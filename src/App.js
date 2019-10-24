@@ -24,12 +24,17 @@ export default class App extends Component {
     });
   }
 
+  //creating edit button on list to change todo list
+  onEdit = (event) => {
+    this.setState({isEditing: true})
+  }
+
   render() {
     return (
-      <div>
+      <div className="todoListMain">
         <form className="App" onSubmit={this.onSubmit}>
-          <input value={this.state.term} onChange={this.onChange} />
-          <button>Submit</button>
+          <input value={this.state.term} onChange={this.onChange} placeholder="enter todo"/>
+          <button type="submit">add</button>
         </form>
         <List items={this.state.items} />
       </div>
