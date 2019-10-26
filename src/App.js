@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import List from './List';
+import logo from './logo512.png';
+
 
 export default class App extends Component {
   constructor(props) {
@@ -8,36 +10,55 @@ export default class App extends Component {
     this.state = {
       term: '',
       items: [],
-      isEditing: null
+      isEditing: false,
+      complete: false
     };
+    this.isComplete = this.isComplete.bind(this);
   }
 
-  onChange = (event) => {
+  inputUpdate = (event) => {
     this.setState({ term: event.target.value });
   }
 
-  onSubmit = (event) => {
+  //tried to add if statement so it will only run if the input field contains text, but it doesn't work here
+  formSubmit = (event) => {
     event.preventDefault();
-    this.setState({
-      term: '',
-      items: this.state.items.concat(this.state.term)
-    });
+    if(this.term !== ''){
+      this.setState({
+        items: this.state.items.concat(this.state.term),
+        term: ''
+      });
+    }
   }
 
   //creating edit button on list to change todo list
-  onEdit = (event) => {
-    this.setState({isEditing: true})
+  isEditing = () => {
+    this.setState({isEditing: !this.state.isEditing})
+  }
+
+  isComplete = (todo, index) => {
+    this.setState({complete: true})
+    let completedItems = this.state.items.slice();
+    completedItems.splice(index, 1);
+    this.setState({
+      items: this.state.items
+    })
   }
 
   render() {
     return (
       <div className="todoListMain">
-        <form className="App" onSubmit={this.onSubmit}>
-          <input value={this.state.term} onChange={this.onChange} placeholder="enter todo"/>
+        {<header className="App-header">
+          <img src={logo} className="App-logo" alt="logo"/>
+    </header>}
+        <form className="App" onSubmit={this.formSubmit}>
+          <input value={this.state.term} onChange={this.inputUpdate} placeholder="enter todo"/>
           <button type="submit">add</button>
         </form>
-        <List items={this.state.items} />
+        <List items={this.state.items}/>
       </div>
     );
   }
 }
+
+//export default App

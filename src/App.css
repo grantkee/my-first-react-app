@@ -4,6 +4,16 @@
 
 .App-logo {
   height: 40vmin;
+  animation: rotation 12s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }
 
 .App-header {
