@@ -29,7 +29,7 @@ const List = (props) => (
     <ul>
         {props.items.map((item, index) => 
             <li key={item.id}>{item.text}<button onClick={() => {props.completed(item, index)}}>Complete</button></li>
-            )}
+        )}
     </ul>
 );
 

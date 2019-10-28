@@ -18,7 +18,7 @@ export default class App extends Component {
   }
 
   inputUpdate = (event) => {
-    this.setState({ todo: {"id": this.state.id +1, "text": event.target.value, "complete": false} });
+    this.setState({ todo: {"id": this.state.id++, "text": event.target.value, "complete": false} });
     // this.setState({id: this.state.id +1})
   }
 
@@ -40,13 +40,13 @@ export default class App extends Component {
   isComplete = (item, index) => {
     this.setState({complete: true})
     console.log(this.state.complete)
-    let completedItems = this.state.items.filter((todo)=> {
-      todo.complete === true
-    })
-    // completedItems.splice(index, 1);
-    this.setState({
-      completedItems
-    })
+    // let completedItems = this.state.items.filter((todo)=> {
+    //   todo.complete === true
+    // })
+    // // completedItems.splice(index, 1);
+    // this.setState({
+    //   completedItems
+    // })
   }
 
   render() {
@@ -61,13 +61,6 @@ export default class App extends Component {
         </form>
         {console.log('items', this.state.items)}
         <List items={this.state.items} completed={this.isComplete}/>
-        {/* <ul>
-        {this.state.items.map((item, index) => 
-            <li key={index}>{item}<button key={index} onClick={() => {this.isComplete(item, index)}}>Complete</button>
-            {console.log(this.state.complete)}
-            </li>
-            )}
-    </ul> */}
       </div>
     );
   }
